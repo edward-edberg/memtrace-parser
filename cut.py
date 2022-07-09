@@ -14,6 +14,7 @@ ap.add_argument("-d", "--dir", required=False, default="/",
 	help="path of the file")
 args = vars(ap.parse_args())
 
+print(f"--- {os.path.basename(__file__)} ---")
 print("Path: {}".format(args["path"]))
 print("Type: {}".format(args["mode"]))
 print("Directory: {}".format(args["dir"]))
@@ -21,9 +22,6 @@ print("Directory: {}".format(args["dir"]))
 
 path = args["path"]
 
-
-# from collections import Counter
-# path = "whiskey_trace-1_1748052322638680856.1036821.txt"
 new_path = ".".join(path.split(".")[:-1])
 try:
     new_path = new_path.split("/")[1]
@@ -141,6 +139,7 @@ print(f"Output Path: {final_path}\n")
 print(result_bytes)
 print("Read Instruction Size: ", convert_bytes(read_size),read_size)
 print("Write Instruction Size: ", convert_bytes(write_size), write_size)
+
 total = read_count + write_count
 read_ratio = read_count / total
 write_ratio = write_count / total
@@ -150,3 +149,11 @@ print(f"Write Count: {write_count} - {write_ratio}")
 # print(cores)
 g.close()
 
+original_size = os.path.getsize(path)
+reduced_size = os.path.getsize(final_path)
+reduced_ratio = (original_size - reduced_size) / original_size
+print("\n")
+print(f"File Size: {convert_bytes(original_size)}")
+print(f"Reduced File Size: {convert_bytes(reduced_size)}")
+print("Reduced Ratio: {:.2f}%".format(reduced_ratio*100))
+print("---")
