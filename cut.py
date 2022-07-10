@@ -46,18 +46,23 @@ g.write("# w (write) - write instruction size in bytes - virtual address convert
 g.write("# e (exit)\n")
 g.write("# i (total instructions) - including read, write, and ifetch (already removed)\n")
 g.write("################################################################################ \n")
+
+stop = 0
+
+check_bytes = []
+read_size = 0
+write_size = 0
+
+read_count = 0
+write_count = 0
+
+cores = []
+timestamps = []
+
+total_instructions = 0
+
 with open(path) as f:
-    stop = 0
 
-    check_bytes = []
-    read_size = 0
-    write_size = 0
-
-    read_count = 0
-    write_count = 0
-    
-    cores = []
-    timestamps = []
     while True:
         line = f.readline().strip()
         isRead = line.__contains__("read")
@@ -125,6 +130,7 @@ with open(path) as f:
 #             print(line)
         elif (isTotal):
             total = line.split(":")[0].strip()
+            total_instructions = total
 #             print(total)
             g.write(f"i {total}\n")
 
@@ -143,9 +149,13 @@ print("Write Instruction Size: ", convert_bytes(write_size), write_size)
 total = read_count + write_count
 read_ratio = read_count / total
 write_ratio = write_count / total
+ifetch_count = int(total_instructions) - total
 print("\n")
 print(f"Read Count: {read_count} - {read_ratio}")
 print(f"Write Count: {write_count} - {write_ratio}")
+print(f"Read Write Count: {total}")
+print(f"ifetch Count: {ifetch_count}")
+print(f"Total Instructions: {total_instructions}")
 # print(cores)
 g.close()
 

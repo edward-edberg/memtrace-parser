@@ -1,5 +1,6 @@
 import argparse
 import sys
+from parse import parse
 
 ### TAKING ARGUMENTS
 ap = argparse.ArgumentParser()
@@ -12,11 +13,16 @@ args = vars(ap.parse_args())
 
 
 def main():
-	print("Path: {}".format(args["path"]))
-	print("Interval: {}".format(args["interval"]))
+
+	path = args["path"]
+	interval = args["interval"]
+	print(f"Path: {path}")
+	print(f"Interval: {interval}")
 	print("\n")
 
-	
+
+	parse(path, interval)
+
 
 
 if __name__ == "__main__":
