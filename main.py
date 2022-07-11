@@ -1,6 +1,7 @@
 import argparse
 import sys
 from parse import parse
+from process_memory import process_memory
 
 ### TAKING ARGUMENTS
 ap = argparse.ArgumentParser()
@@ -21,8 +22,11 @@ def main():
 	print("\n")
 
 
-	parse(path, interval)
+	read, write, read_write, unique_read, unique_write, unique_read_write, filename = parse(path, interval)
 
+	process_memory(read, unique_read, "read", filename)
+	process_memory(write, unique_write, "write", filename)
+	process_memory(read_write, unique_read_write, "read_write", filename)
 
 
 if __name__ == "__main__":

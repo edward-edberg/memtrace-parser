@@ -24,3 +24,14 @@ def create_folder(folder_name):
     # else:
         # os.system(f"rm -rf {temp_dir}")
         # os.makedirs(temp_dir)
+
+def decimalCount(result):
+    final = {}
+    for i in result:
+#         print(i, result[i])
+        temp_sum = sum(result[i])
+        final[i] = temp_sum
+    return final
+
+def returnSum(dict):
+    return sum(dict.values())

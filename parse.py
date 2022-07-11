@@ -151,4 +151,4 @@ def parse(input_path, input_interval):
     pd.to_pickle(uniqueWrite, f"{folder}/{new_path}.unique.write.pickle")
     pd.to_pickle(uniqueReadWrite, f"{folder}/{new_path}.unique.readwrite.pickle")
 
-    return resultRead, resultWrite, resultReadWrite, uniqueRead, uniqueWrite, uniqueReadWrite
+    return resultRead, resultWrite, resultReadWrite, uniqueRead, uniqueWrite, uniqueReadWrite, new_path
