@@ -25,6 +25,16 @@ def create_folder(folder_name):
         # os.system(f"rm -rf {temp_dir}")
         # os.makedirs(temp_dir)
 
+def create_temp_folder(folder_name):
+    temp_dir = folder_name
+    check = os.path.isdir(temp_dir)
+
+    if not check:
+        os.makedirs(temp_dir)
+    else:
+        os.system(f"rm -rf {temp_dir}")
+        os.makedirs(temp_dir)
+
 def decimalCount(result):
     final = {}
     for i in result:
